@@ -1,14 +1,16 @@
 // TODO: Import required modules
 // Hint: You will need the 'fs' module for reading the file and the 'chalk' library for coloring the words.
-import { readFileSync } from 'node:fs';
-import chalk from 'chalk';
 /**
  * Synchronously reads the content of 'declaration.txt'.
  * @returns {string} The content of the file.
  */
+const fs = require("fs");
+const chalk = require('chalk');
+
+
 function readFileContent() {
     // TODO: Use the 'fs' module to synchronously read the content of 'declaration.txt' and return it.
-    const fulldec = readFileSync('declaration.txt', 'UTF-8');
+    const fulldec = fs.readFileSync('declaration.txt', 'UTF-8');
     return fulldec;
 }
 
@@ -24,7 +26,7 @@ function getWordCounts(content) {
     const words = content.split(/\W+/).filter(Boolean); // Splitting by non-word characters.
 
     for (const word of words) {
-        wordCount[word] = (wordCount[word] || 0) + 1;
+        wordCount[word.toLowerCase()] = (wordCount[word.toLowerCase()] || 0) + 1;
     }
 
     return wordCount;
@@ -64,7 +66,7 @@ function printColoredLines(content, wordCount) {
 
     for (const line of lines) {
         const coloredLine = line.split(/\W+/).map(word => {
-            colorWord(word, wordCount[word]);
+            return colorWord(word, wordCount[word.toLowerCase()]);
         }).join(' ');
 
         console.log(coloredLine);
@@ -87,3 +89,4 @@ if (require.main === module) {
 
 // TODO: Export the functions for testing
 // Hint: You can use the 'module.exports' syntax.
+module.exports = {readFileContent, getWordCounts, colorWord, printColoredLines, processFile};

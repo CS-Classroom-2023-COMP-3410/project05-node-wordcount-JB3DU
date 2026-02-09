@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import chalk from 'chalk';
 /**
  * Synchronously reads the content of 'declaration.txt'.
- * returns the content of the file.
+ * @returns {string} The content of the file.
  */
 function readFileContent() {
     // TODO: Use the 'fs' module to synchronously read the content of 'declaration.txt' and return it.
@@ -14,6 +14,8 @@ function readFileContent() {
 
 /**
  * Gets the word count from the content.
+ * @param {string} content The file content.
+ * @returns {Object} An object with words as keys and their occurrences as values.
  */
 function getWordCounts(content) {
     // TODO: Implement a function to count occurrences of each word in the content.
@@ -62,7 +64,7 @@ function printColoredLines(content, wordCount) {
 
     for (const line of lines) {
         const coloredLine = line.split(/\W+/).map(word => {
-            colorWord(word, wordCount[word]); // TODO: Color the word based on its frequency using the 'colorWord' function.
+            colorWord(word, wordCount[word]);
         }).join(' ');
 
         console.log(coloredLine);
